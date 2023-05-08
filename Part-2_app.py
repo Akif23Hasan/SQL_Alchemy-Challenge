@@ -116,7 +116,7 @@ def stations():
 
     return jsonify(stations_list)
 
-#Print it out and might have to change the np.ravel function from 2d to 1d  
+
 
 @app.route("/api/v1.0/precipitation")
 
