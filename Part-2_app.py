@@ -85,7 +85,7 @@ def start_end(start,end):
 @app.route('/api/v1.0/tobs')
 def tobs():
     session = Session(engine)
-    lateststr = session.query(analysis.date).order_by(analysis.date.desc()).first()[0]
+    lateststr = session.query(analysis.date).filter(analysis.station == "USC00519281").order_by(analysis.date.desc()).first()[0]
     latestdate = dt.datetime.strptime(lateststr, '%Y-%m-%d')
     querydate = dt.date(latestdate.year -1, latestdate.month, latestdate.day)
     sel = [analysis.date,analysis.tobs]
@@ -99,7 +99,6 @@ def tobs():
         tobs_dict["Tobs"] = tobs
         tobsall.append(tobs_dict)
 
-    return jsonify(tobsall)
 
 @app.route('/api/v1.0/stations')
 def stations():
